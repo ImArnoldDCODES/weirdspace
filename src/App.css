@@ -1,38 +1,185 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;300&display=swap");
+
+body,
+html {
+  opacity: 1;
+}
+
 .App {
-  text-align: center;
+  background: #cacaca;
+  height: 100vh;
+  width: 100vw;
+  border: 1px saddlebrown solid;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.container {
+  height: 100%;
+  position: relative;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.logo {
+  margin: 3%;
+  width: fit-content;
+  font-family: "Oswald", sans-serif;
+  font-weight: 300;
+  opacity: 1 !important;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.hamburger {
+  width: 3rem;
+  position: absolute;
+  top: 0;
+  right: 3rem;
+  cursor: pointer;
+}
+.center {
+  width: 45rem;
+  height: fit-content;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+.center h3 {
+  font-size: 170px;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  font-family: "PT Serif", serif;
+  font-weight: 400;
+  letter-spacing: -5px;
+}
+.center h5 {
+  font-size: 40px;
+  text-align: end;
+  position: relative;
+  left: 70%;
+  font-size: 80px;
+  margin: 0;
+  padding: 0;
+  width: fit-content;
+  font-family: "Caveat", cursive;
+}
+.text1 {
+  position: absolute;
+  width: 12rem;
+  height: fit-content;
+  right: 20rem;
+  top: 5rem;
   display: flex;
   flex-direction: column;
+  font-family: "Arial";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+  color: rgba(0, 0, 0, 0.6);
+}
+.text1 > * {
+  text-align: start;
+  width: 100%;
+}
+.text2 {
+  position: absolute;
+  width: 280px;
+  height: 80px;
+  left: 40rem;
+  bottom: 40px;
+
+  font-family: "Arial";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+
+  color: rgba(0, 0, 0, 0.6);
+}
+.img2 {
+  position: absolute;
+  width: 30rem;
+  height: 511px;
+  left: 25rem;
+  top: -9rem;
+  opacity: 1;
+}
+.img1 {
+  position: absolute;
+  width: 30rem;
+  height: 324px;
+  left: 3%;
+  bottom: 0;
+}
+.img3 {
+  position: absolute;
+  width: 30rem;
+  height: 40rem;
+  right: 3%;
+  bottom: -6rem;
+  z-index: 1;
 }
 
-.App-link {
-  color: #61dafb;
+.hover {
+  position: absolute;
+  width: 10rem;
+  height: 10rem;
+  top: 5rem;
+  right: 15rem;
+  opacity: 0;
+  animation: margic 1s ease-in;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@keyframes margic {
+  0% {
+    opacity: 0;
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    opacity: 1;
   }
+  100% {
+    opacity: 0;
+  }
+}
+
+.navbar {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 50vh;
+  width: 25rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  z-index: 3;
+  display: block;
+}
+
+.navbar ul {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
+}
+.navbar ul li {
+  font-size: 50px;
+  font-family: "Oswald", sans-serif;
+  list-style: none;
+  z-index: 3;
+}
+.navbar ul li:hover {
+  text-decoration: line-through;
+}
+.dash {
+  position: absolute;
+  height: 3px;
+  margin-top: -4rem;
+  background-color: #000;
+  z-index: 4;
 }
