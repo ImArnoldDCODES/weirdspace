@@ -80,8 +80,6 @@ const App = ({ onClose }) => {
 
   useEffect(() => {
     const checkIfClickedOutside = e => {
-      // If the menu is open and the clicked target is not within the menu,
-      // then close the menu
       if (open && modalRef.current && !modalRef.current.contains(e.target)) {
         setOpen(false)
       }
@@ -90,7 +88,6 @@ const App = ({ onClose }) => {
     document.addEventListener("mousedown", checkIfClickedOutside)
 
     return () => {
-      // Cleanup the event listener
       document.removeEventListener("mousedown", checkIfClickedOutside)
     }
   }, [open])
