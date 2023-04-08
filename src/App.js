@@ -5,11 +5,10 @@ import IMG3 from './assets/IMG-3.svg'
 import HOVER from './assets/hoverimg.jpg'
 import Hamburger from './assets/Menu.svg'
 import { useState, useEffect, useRef } from 'react'
-import { TimelineMax, Power3, gsap } from "gsap";
+import { Power3, gsap } from "gsap";
 
 
-const App = () => {
-  const [imgshow, setImgShow] = useState(false)
+const App = ({ onClose }) => {
   const app = useRef(null);
   const tl = useRef()
   let ease = Power3.easeOut;
@@ -59,6 +58,7 @@ const App = () => {
             amount: 2
           }
         }, "-=4")
+
     }, app);
 
 
@@ -67,11 +67,41 @@ const App = () => {
 
   }, [])
 
+  const animateIn = (image) => {
+    gsap.to(image, { opacity: 1, duration: 0.5 });
+  };
+
+  const animateOut = (image) => {
+    gsap.to(image, { opacity: 0, duration: 0.5 });
+  };
+
+  const modalRef = useRef();
   const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    const checkIfClickedOutside = e => {
+      // If the menu is open and the clicked target is not within the menu,
+      // then close the menu
+      if (open && modalRef.current && !modalRef.current.contains(e.target)) {
+        setOpen(false)
+      }
+    }
+
+    document.addEventListener("mousedown", checkIfClickedOutside)
+
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener("mousedown", checkIfClickedOutside)
+    }
+  }, [open])
+
+
 
   return (
     <div className="App" ref={app}>
       <div className='container'>
+        <img src={IMG1} alt="1" className="image" style={{ opacity: '0' }} />
+        <img src={IMG2} alt="2" className="image" style={{ opacity: '0' }} />
         <div className='logo'>
           Weird Space
         </div>
@@ -83,7 +113,8 @@ const App = () => {
           <h5>Objects</h5>
         </div>
         <h6 className='text1'
-          onMouseOverCapture={() => setImgShow(true)}
+          onMouseEnter={() => animateIn('.imgshow')}
+          onMouseLeave={() => animateOut('.imgshow')}
         >
           <span>Painting creates silence.</span>
           <span> You could examine the objects themselves,</span>
@@ -94,13 +125,15 @@ const App = () => {
         <img src={IMG2} alt='' width={100} height={100} className='img2' />
         <img src={IMG3} alt='' width={100} height={100} className='img3' />
       </div>
-      <img src={HOVER} alt='' width={100} height={100} className={imgshow ? 'hover' : ''} />
-      <div className={open ? 'navbar' : ''}>
-        <ul>
-          <li>HOME</li>
-          <li>GALLERY</li>
-          <li>ABOUT</li>
-        </ul>
+      <img src={HOVER} alt='' width={100} height={100} className='imgshow' />
+      <div ref={modalRef}>
+        <div onClose={onClose} className={open ? 'navbar' : ''}>
+          <ul>
+            <li>HOME</li>
+            <li>GALLERY</li>
+            <li>ABOUT</li>
+          </ul>
+        </div>
       </div>
     </div>
   );
